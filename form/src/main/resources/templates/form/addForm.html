@@ -18,18 +18,20 @@
         <h2>상품 등록 폼</h2>
     </div>
 
-    <form action="item.html" th:action method="post">
+    <form action="item.html" th:object="${item}" th:action method="post">
         <div>
+            <!-- object 가 지정되어 있으면, item객체에 소속된 itemName필드임을 인식하고, *로 대체가능하다. *{필드명} -->
+            <!-- th:field 로 id, name, value 속성을 필드명으로 자동 생성해준다. value는 빈값이 디폴트. -->
             <label for="itemName">상품명</label>
-            <input type="text" id="itemName" name="itemName" class="form-control" placeholder="이름을 입력하세요">
+            <input type="text" th:field="*{itemName}" id="itemName" class="form-control" placeholder="이름을 입력하세요">
         </div>
         <div>
             <label for="price">가격</label>
-            <input type="text" id="price" name="price" class="form-control" placeholder="가격을 입력하세요">
+            <input type="text" th:field="*{price}"  id="price" class="form-control" placeholder="가격을 입력하세요">
         </div>
         <div>
             <label for="quantity">수량</label>
-            <input type="text" id="quantity" name="quantity" class="form-control" placeholder="수량을 입력하세요">
+            <input type="text" th:field="*{quantity}" id="quantity" class="form-control" placeholder="수량을 입력하세요">
         </div>
 
         <hr class="my-4">
