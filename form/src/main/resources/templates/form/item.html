@@ -50,6 +50,17 @@
         </div>
     </div>
 
+    <!-- multi checkbox -->
+    <div>
+        <div>등록 지역</div>
+        <div th:each="region : ${regions}" class="form-check form-check-inline">
+            <!-- key에는 모든 항목리스트가 있음. regions는 사용자가 체크한 리스트가 있음. 둘을 비교하여 사용자가 체크한 것만 체크하여 보여준다. -->
+            <input type="checkbox" th:field="${item.regions}" th:value="${region.key}" class="form-check-input" disabled>
+            <label th:for="${#ids.prev('regions')}"
+                   th:text="${region.value}" class="form-check-label">서울</label>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
