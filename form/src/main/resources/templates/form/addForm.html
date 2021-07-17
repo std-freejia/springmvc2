@@ -35,8 +35,9 @@
         </div>
 
         <hr class="my-4">
-            <!-- single checkbox -->
-            <div>판매 여부</div> <div>
+
+        <!-- single checkbox -->
+        <div>판매 여부</div> <div>
             <div class="form-check">
                 <input type="checkbox" id="open" th:field="*{open}" class="form-check-input">
                 <label for="open" class="form-check-label">판매 오픈</label>
@@ -45,11 +46,23 @@
 
         <!-- multi checkbox -->
         <div>
-            <div>등록 지역</div>
+            <div>등록 지역</div> <!--@ModelAttribute("regions") -> ${regions} -->
             <div th:each="region : ${regions}" class="form-check form-check-inline">
                 <input type="checkbox" th:field="*{regions}" th:value="${region.key}" class="form-check-input">
                 <label th:for="${#ids.prev('regions')}"
                        th:text="${region.value}" class="form-check-label">서울</label>
+            </div>
+        </div>
+
+        <!-- radio button -->
+        <div>
+            <div>상품 종류</div> <!-- @ModelAttribute("itemTypes") -> ${itemTypes} -->
+            <div th:each="type : ${itemTypes}" class="form-check form-check-inline">
+                <!-- type.name() : enum의 이름 그대로 리턴 (BOOK, FOOD, ETC) -->
+                <input type="radio" th:field="*{itemType}" th:value="${type.name()}" class="form-check-input">
+                <label th:for="${#ids.prev('itemType')}" th:text="${type.description}" class="form-check-label">
+                    BOOK
+                </label>
             </div>
         </div>
 
