@@ -1,5 +1,6 @@
 package hello.itemservice.web.form;
 
+import hello.itemservice.domain.item.DeliveryCode;
 import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
 import hello.itemservice.domain.item.ItemType;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +39,15 @@ public class FormItemController {
     public ItemType[] itemTypes(){ // 상품 종류 배열
         ItemType[] values = ItemType.values(); /** enum의 모든 정보를 배열로 돌려줌 */
         return values;
+    }
+
+    @ModelAttribute("deliveryCodes")
+    public List<DeliveryCode> deliveryCodes(){ // 참고) static으로 만들어놓고 공유해서 쓰는게 더 효율적임
+        List<DeliveryCode> deliveryCodes = new ArrayList<>();
+        deliveryCodes.add(new DeliveryCode("FAST", "빠른배송"));
+        deliveryCodes.add(new DeliveryCode("NORMAL", "일반배송"));
+        deliveryCodes.add(new DeliveryCode("SLOW", "느린배송"));
+        return deliveryCodes;
     }
 
     @GetMapping
