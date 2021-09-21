@@ -28,17 +28,9 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String homeLoginV3(HttpServletRequest request, Model model) {
+    public String homeLoginV3Spring(
+            @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false)Member loginMember, Model model){
 
-        //세션이 없으면 home
-        HttpSession session = request.getSession(false);
-        // 세션을 찾아서 사용하는 시점에는 create:false 옵션을 사용하여 세션을 생성하지 말아야 한다.
-        // 그저 조회하고 싶기 때문이다.
-        if (session == null) {
-            return "home"; // 세션이 없으면 home
-        }
-
-        Member loginMember = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
         //세션에 회원 데이터가 없으면 home
         if(loginMember == null){
             return "home";
@@ -48,7 +40,6 @@ public class HomeController {
         model.addAttribute("member", loginMember);
         return "loginHome";
     }
-
 
     // @GetMapping("/")
     public String homeLoginV1(
@@ -83,4 +74,25 @@ public class HomeController {
         return "loginHome";
     }
 
+    // @GetMapping("/")
+    public String homeLoginV3(HttpServletRequest request, Model model) {
+
+        //세션이 없으면 home
+        HttpSession session = request.getSession(false);
+        // 세션을 찾아서 사용하는 시점에는 create:false 옵션을 사용하여 세션을 생성하지 말아야 한다.
+        // 그저 조회하고 싶기 때문이다.
+        if (session == null) {
+            return "home"; // 세션이 없으면 home
+        }
+
+        Member loginMember = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
+        //세션에 회원 데이터가 없으면 home
+        if(loginMember == null){
+            return "home";
+        }
+
+        //세션이 유지되면 loginHome 으로 이동
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+    }
 }
