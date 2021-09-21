@@ -12,7 +12,7 @@ public class Member {
     @NotEmpty
     private String loginId; // 로그인 아이디
     @NotEmpty
-    private String name;
+    private String name; // 이름
     @NotEmpty
     private String password; // 패스워드
 
