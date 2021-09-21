@@ -41,6 +41,14 @@ public class HomeController {
         return "loginHome";
     }
 
+    /**
+     * 실무에서 세션 객체는 Member 객체 전부 넣으면 안된다.
+     * 최소한의 데이터만 넣어야 한다.
+     * 왜냐하면 로그인한 사용자가 많아질수록 '객체 용량 * 사용자수' 만큼의 서버 메모리를 소모하기 때문이다.
+     * 로그인 용 멤버객체를 따로 만들자.
+     * 아이디나 회원명 정도 최소한의 개수로 데이터를 담자.
+     * */
+
     // @GetMapping("/")
     public String homeLoginV1(
             @CookieValue(name="memberId", required = false) Long memberId, Model model){
