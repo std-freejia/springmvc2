@@ -33,7 +33,7 @@ public class LoginController {
     }
 
     /** V3: 서블릿 HTTP 세션1 */
-    @PostMapping("login")
+    @PostMapping("/login")
     public String loginV3(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
                           HttpServletRequest request){
         if(bindingResult.hasErrors()){
